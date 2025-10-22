@@ -198,6 +198,24 @@ body{
   .auth-card .btn { padding:8px 10px; font-size:0.95rem }
 }
 
+/* Additional mobile polish: lift the auth card and reduce the empty hero area */
+@media (max-width: 520px){
+  .hero{ padding:10px 8px; min-height:80px }
+  .hero .hero-title{ font-size:18px }
+  .auth-wrapper{ margin-top: -30px; padding-bottom:18px }
+  .auth-card{ transform: translateY(-12px); z-index: 50; box-shadow: 0 10px 30px rgba(0,0,0,0.14) }
+  /* make sure header stays visible */
+  .app-header{ position: sticky; top:0; z-index:100 }
+}
+
+/* Very small phones: keep everything compact */
+@media (max-width: 360px){
+  .auth-card{ padding:8px }
+  .auth-card .col-md-6{ padding:8px }
+  .auth-card h2{ font-size:17px }
+  .hero{ min-height:66px }
+}
+
 /* Prevent auth card from reacting to global .card:hover transform */
 .auth-card:hover{ transform: none !important }
 
