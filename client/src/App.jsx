@@ -14,7 +14,8 @@ const _rawApi = import.meta.env.VITE_API_URL || ''
 function looksLikeMongoUri(s){ return typeof s === 'string' && /^mongodb(\+srv)?:\/\//i.test(s) }
 function isAbsoluteUrl(s){ return /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(s) }
 function normalizeApi(raw){
-  if (!raw) return 'http://localhost:4000/api'
+  // default to the deployed Render backend if no VITE_API_URL is provided
+  if (!raw) return 'https://kyrsova-0cpo.onrender.com/api'
   if (looksLikeMongoUri(raw)){
     console.error('VITE_API_URL looks like a MongoDB connection string. Set VITE_API_URL to your backend API URL (e.g. https://my-backend.onrender.com/api). Falling back to http://localhost:4000/api')
     return 'http://localhost:4000/api'
@@ -36,6 +37,9 @@ function normalizeApi(raw){
 }
 const API = normalizeApi(_rawApi)
 console.log('Using API base:', API)
+
+// make axios use the same base URL so components can call relative paths
+axios.defaults.baseURL = API
 
 // attach token if present
 const token = localStorage.getItem('token')
