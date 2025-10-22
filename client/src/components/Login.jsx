@@ -15,8 +15,8 @@ export default function Login({api, onLogin}){
       console.log('Login submit', {username})
       setErr(null)
       setLoading(true)
-      const res = await axios.post(`${api}/auth/login`, {username, password})
-      onLogin(res.data.token)
+  const { data } = await axios.post(`${api}/auth/login`, {username, password})
+  onLogin(data.token)
       // navigate to home after successful login
       navigate('/')
     } catch (e) { setErr(e.response?.data?.error || e.message) }

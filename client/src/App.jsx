@@ -8,7 +8,34 @@ import Register from './components/Register'
 import YearTab from './components/YearTab'
 import YearPage from './components/YearPage'
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:4000/api'
+// Normalize and validate the API base URL provided via VITE_API_URL.
+// Guard against accidentally pasting a MongoDB connection string into VITE_API_URL.
+const _rawApi = import.meta.env.VITE_API_URL || ''
+function looksLikeMongoUri(s){ return typeof s === 'string' && /^mongodb(\+srv)?:\/\//i.test(s) }
+function isAbsoluteUrl(s){ return /^[a-zA-Z][a-zA-Z0-9+.-]*:\/\//.test(s) }
+function normalizeApi(raw){
+  if (!raw) return 'http://localhost:4000/api'
+  if (looksLikeMongoUri(raw)){
+    console.error('VITE_API_URL looks like a MongoDB connection string. Set VITE_API_URL to your backend API URL (e.g. https://my-backend.onrender.com/api). Falling back to http://localhost:4000/api')
+    return 'http://localhost:4000/api'
+  }
+  // If absolute (has protocol) use as-is (trim trailing slash)
+  if (isAbsoluteUrl(raw)) return raw.replace(/\/+$/,'')
+  // If starts with a slash, make absolute relative to current origin
+  if (raw.startsWith('/')) return `${location.origin}${raw.replace(/\/+$/,'')}`
+  // Otherwise assume https host if no protocol provided
+  try {
+    const candidate = `https://${raw}`
+    // ensure URL constructor accepts it
+    new URL(candidate)
+    return candidate.replace(/\/+$/,'')
+  } catch (e){
+    console.warn('VITE_API_URL is not a valid absolute URL; falling back to http://localhost:4000/api')
+    return 'http://localhost:4000/api'
+  }
+}
+const API = normalizeApi(_rawApi)
+console.log('Using API base:', API)
 
 // attach token if present
 const token = localStorage.getItem('token')

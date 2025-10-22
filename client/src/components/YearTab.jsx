@@ -9,8 +9,8 @@ export default function YearTab({year, api, refreshList}){
   const fetchStats = async () => {
     setLoading(true)
     try{
-      const res = await axios.get(`${api}/admin/stats/${year}`)
-      setStats(res.data)
+  const { data } = await axios.get(`${api}/admin/stats/${year}`)
+  setStats(data)
     }catch(e){ console.error(e) }
     setLoading(false)
   }
@@ -18,8 +18,8 @@ export default function YearTab({year, api, refreshList}){
   const seed = async (count) => {
     setLoading(true)
     try{
-      if (count) await axios.post(`${api}/admin/seed/${year}/${count}`)
-      else await axios.post(`${api}/admin/seed/${year}`)
+  if (count) await axios.post(`${api}/admin/seed/${year}/${count}`)
+  else await axios.post(`${api}/admin/seed/${year}`)
       await fetchStats()
       if (refreshList) refreshList()
     }catch(e){ console.error(e) }
@@ -29,7 +29,7 @@ export default function YearTab({year, api, refreshList}){
   const clearAll = async () => {
     setLoading(true)
     try{
-      await axios.delete(`${api}/admin/clear/${year}`)
+  await axios.delete(`${api}/admin/clear/${year}`)
       await fetchStats()
       if (refreshList) refreshList()
     }catch(e){ console.error(e) }

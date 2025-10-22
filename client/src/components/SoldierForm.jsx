@@ -35,9 +35,9 @@ export default function SoldierForm({onSaved, editing, setEditing, api, year}){
       payload.fullName = sanitizeName(payload.fullName)
       if (!payload.yearOut) payload.yearOut = year || form.yearOut
       if (editing && editing._id) {
-        await axios.put(`${api}/soldiers/${editing._id}`, payload)
+        const { data } = await axios.put(`${api}/soldiers/${editing._id}`, payload)
       } else {
-        await axios.post(`${api}/soldiers`, payload)
+        const { data } = await axios.post(`${api}/soldiers`, payload)
       }
       setForm({fullName:'', rank:'Лейтенант', specialty:'', yearIn:'', yearOut: year || '', averageGrade: '', unit:'', unitNumber:'', unitName:'', position:''})
       onSaved()

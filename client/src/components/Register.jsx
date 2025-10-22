@@ -10,8 +10,9 @@ export default function Register({api}){
   const submit = async (e) =>{
     e.preventDefault()
     try {
-      await axios.post(`${api}/auth/register`, {username, password})
-      setOk('Користувача створено. Можна увійти.')
+  const { data } = await axios.post(`${api}/auth/register`, {username, password})
+  // server may return created user or success message
+  setOk('Користувача створено. Можна увійти.')
       setErr(null)
     } catch (e) { setErr(e.response?.data?.error || e.message); setOk(null) }
   }

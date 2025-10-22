@@ -8,16 +8,16 @@ export default function SoldiersList({soldiers, refresh, setEditing, api, year, 
 
   const del = async (id) => {
     if (!confirm('Видалити запис?')) return;
-    await axios.delete(`${api}/soldiers/${id}`)
-    refresh()
+  await axios.delete(`${api}/soldiers/${id}`)
+  refresh()
   }
 
   const exportCsv = async () => {
     setExportErr(null)
     try{
       const exportUrl = `${api}/export` + (year ? `?yearOut=${year}` : '')
-      const res = await axios.get(exportUrl, { responseType: 'blob' })
-      const blob = new Blob([res.data])
+  const { data } = await axios.get(exportUrl, { responseType: 'blob' })
+  const blob = new Blob([data])
       const blobUrl = window.URL.createObjectURL(blob)
       const link = document.createElement('a')
       link.href = blobUrl

@@ -12,8 +12,8 @@ export default function YearPage({year, api}){
 
   const fetch = async () => {
     try{
-      const res = await axios.get(`${api}/soldiers?yearOut=${year}`)
-      setSoldiers(res.data)
+  const { data } = await axios.get(`${api}/soldiers?yearOut=${year}`)
+  setSoldiers(data)
     }catch(e){ console.error(e) }
   }
 
