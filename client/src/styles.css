@@ -182,9 +182,9 @@ body{
 .auth-card .form-control, .auth-card .form-select { font-size:0.95rem }
 
 @media (max-width: 900px){
-  .auth-wrapper{ align-items:flex-start; padding-top:30px }
-  .auth-card{ width: 96%; padding:14px; gap:12px }
-  .auth-card .col-md-6{ flex: 1 1 100%; max-width:100%; min-width: auto; padding:12px }
+  .auth-wrapper{ align-items:flex-start; padding-top:20px }
+  .auth-card{ width: 96%; padding:12px; gap:12px; flex-direction: column }
+  .auth-card .col-md-6{ flex: 0 1 100%; max-width:100%; min-width: auto; padding:10px; width:100% }
   .auth-card .form-control, .auth-card .form-select { font-size:0.95rem }
   .auth-card .btn { padding:10px 14px }
 }
@@ -202,8 +202,8 @@ body{
 @media (max-width: 520px){
   .hero{ padding:10px 8px; min-height:80px }
   .hero .hero-title{ font-size:18px }
-  .auth-wrapper{ margin-top: -30px; padding-bottom:18px }
-  .auth-card{ transform: translateY(-12px); z-index: 50; box-shadow: 0 10px 30px rgba(0,0,0,0.14) }
+  .auth-wrapper{ padding-bottom:18px }
+  .auth-card{ z-index: 50; box-shadow: 0 10px 30px rgba(0,0,0,0.12) }
   /* make sure header stays visible */
   .app-header{ position: sticky; top:0; z-index:100 }
 }
