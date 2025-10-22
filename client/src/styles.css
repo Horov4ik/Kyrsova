@@ -173,9 +173,30 @@ body{
 .hero-actions .btn { margin-bottom:8px }
 
 /* Login/Register centered card */
-.auth-wrapper{ display:flex; align-items:center; justify-content:center; min-height: calc(100vh - 120px) }
-.auth-card{ width: min(900px, 95%); display:flex; gap:20px; padding:20px; flex-wrap:wrap; align-items:stretch; justify-content:center }
-.auth-card .col-md-6{ background: linear-gradient(180deg,#fff,#fbfdf6); padding:18px; border-radius:10px; box-sizing:border-box; flex: 0 1 46%; min-width:220px }
+.auth-wrapper{ display:flex; align-items:center; justify-content:center; min-height: calc(100vh - 100px); padding:24px; box-sizing:border-box }
+.auth-card{ width: min(920px, 98%); display:flex; gap:18px; padding:22px; flex-wrap:wrap; align-items:stretch; justify-content:center; box-sizing:border-box }
+.auth-card .col-md-6{ background: linear-gradient(180deg,#fff,#fbfdf6); padding:18px; border-radius:10px; box-sizing:border-box; flex: 1 1 320px; min-width:260px; max-width:48% }
+
+/* Make auth card text and controls slightly smaller on narrow screens */
+.auth-card .card h5, .auth-card h2 { margin:0; }
+.auth-card .form-control, .auth-card .form-select { font-size:0.95rem }
+
+@media (max-width: 900px){
+  .auth-wrapper{ align-items:flex-start; padding-top:30px }
+  .auth-card{ width: 96%; padding:14px; gap:12px }
+  .auth-card .col-md-6{ flex: 1 1 100%; max-width:100%; min-width: auto; padding:12px }
+  .auth-card .form-control, .auth-card .form-select { font-size:0.95rem }
+  .auth-card .btn { padding:10px 14px }
+}
+
+@media (max-width: 480px){
+  .auth-wrapper{ padding:12px }
+  .auth-card{ padding:10px }
+  .auth-card .col-md-6{ padding:10px }
+  .auth-card h2{ font-size:20px }
+  .auth-card .form-control, .auth-card .form-select { font-size:0.9rem }
+  .auth-card .btn { padding:8px 10px; font-size:0.95rem }
+}
 
 /* Prevent auth card from reacting to global .card:hover transform */
 .auth-card:hover{ transform: none !important }
