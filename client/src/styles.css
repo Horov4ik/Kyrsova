@@ -1,0 +1,163 @@
+/* Basic responsive layout using Flexbox and media queries */
+/* MM-14 Ukrainian pixel camo inspired palette */
+:root{
+  --camo-dark:#3b3f2b; /* dark olive */
+  --camo-mid:#7a7f4a; /* mid green */
+  --camo-light:#c9d29b; /* light beige */
+  --accent:#0072bb; /* Ukrainian blue accent */
+  --accent-2:#ffd700; /* yellow accent */
+}
+
+body{
+  /* Single-tone MM-14 inspired background (soft camo base) */
+  background: radial-gradient(circle at 10% 10%, #e9f0d0 0%, transparent 20%),
+              radial-gradient(circle at 90% 40%, #dfe6b8 0%, transparent 18%),
+              linear-gradient(180deg, var(--camo-light) 0%, #dee6bf 100%);
+  color: #17201a;
+  font-family: Inter, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+.card{ background: linear-gradient(180deg, rgba(255,255,255,0.95), rgba(250,250,250,0.9)); border-radius:10px; box-shadow: 0 2px 8px rgba(0,0,0,0.08)}
+
+.btn-primary{ background: var(--camo-dark); border-color: var(--camo-dark) }
+.btn-success{ background: var(--camo-mid); border-color: var(--camo-mid) }
+.btn-warning{ background: var(--accent); color: white }
+
+.list-group-item{ background: linear-gradient(90deg, rgba(0,0,0,0.02), rgba(255,255,255,0.02)); border-radius:6px }
+
+/* Animations */
+.animate-fadein{ animation: fadeInUp .45s ease both }
+@keyframes fadeInUp{ from { opacity:0; transform: translateY(8px) } to { opacity:1; transform: translateY(0) } }
+
+.animate-card{ animation: cardPop .35s cubic-bezier(.2,.9,.3,1) both }
+@keyframes cardPop{ from { transform: scale(.995); opacity:0 } to { transform: scale(1); opacity:1 } }
+
+.hero{ background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(245,248,235,0.9)); border-radius:12px }
+.hero-title{ margin:0; color:var(--camo-dark) }
+.hero-actions .btn{ min-width: 160px }
+
+/* center hero and make background feel single-tone */
+.container{ max-width:1100px }
+.hero{ margin: 0 auto; position: relative; text-align:center }
+.logout-btn{ position: relative; }
+
+/* Header / Footer */
+.app-header{ background: rgba(255,255,255,0.7); backdrop-filter: blur(4px); border-bottom: 1px solid rgba(0,0,0,0.03); }
+.app-header .header-inner{ display:flex; align-items:center; justify-content:space-between; padding:10px 0 }
+.logo-area{ display:flex; align-items:center; gap:12px }
+.logo-placeholder{ width:54px; height:54px; border-radius:50%; background: linear-gradient(135deg,var(--camo-mid),var(--camo-dark)); color:white; display:flex; align-items:center; justify-content:center; font-weight:700 }
+.site-name{ font-size:20px; font-weight:700; color:var(--camo-dark) }
+
+/* logo image sizing and fallback */
+.logo-placeholder{ position: relative; overflow: hidden }
+.site-logo{ width:100%; height:100%; object-fit:cover; display:block }
+.logo-fallback{ position: absolute; inset:0; display:flex; align-items:center; justify-content:center; color:white; font-weight:700 }
+.site-logo + .logo-fallback{ display:none }
+
+.app-footer{ margin-top:30px; padding:14px 0; background: linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4)); border-top:1px solid rgba(0,0,0,0.03) }
+.app-footer .footer-inner{ display:flex; justify-content:space-between; font-size:14px; color:rgba(23,32,26,0.8) }
+
+/* center container vertically */
+.full-height-center{ display:flex; align-items:center; min-height: calc(100vh - 32px) }
+
+/* MM-14 themed form controls and buttons */
+.form-control, .form-select {
+  border: 1px solid rgba(59,63,43,0.12);
+  background: linear-gradient(180deg, rgba(255,255,255,0.98), rgba(245,248,235,0.98));
+  color: var(--camo-dark);
+}
+.form-control:focus, .form-select:focus{ box-shadow: 0 0 0 0.15rem rgba(122,127,74,0.12); border-color: var(--camo-mid); }
+
+.btn-outline-primary{ color: var(--camo-dark); border-color: rgba(59,63,43,0.16); background: transparent }
+.btn-outline-primary:hover{ background: linear-gradient(180deg, rgba(122,127,74,0.08), rgba(122,127,74,0.04)); border-color: var(--camo-mid); color:var(--camo-dark) }
+
+/* Release-style buttons (used for Випуск buttons and others) */
+.btn-release, .btn.btn-release, a.btn-release { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; border-radius:10px; border:1px solid rgba(59,63,43,0.12); background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,248,235,0.96)); color:var(--camo-dark); box-shadow: 0 2px 6px rgba(0,0,0,0.04); transition: transform .12s ease, box-shadow .12s ease }
+.btn-release:hover{ transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); color:var(--camo-dark) }
+
+/* Make logout look like a release outline button */
+.logout-btn{ background: transparent; border: 1px solid rgba(59,63,43,0.12); color:var(--camo-dark); padding:8px 12px; border-radius:8px }
+.logout-btn:hover{ background: linear-gradient(180deg, rgba(122,127,74,0.06), rgba(122,127,74,0.03)); transform: translateY(-2px) }
+
+/* --- GLOBAL: Make all buttons look like release buttons --- */
+/* This forces the release appearance across the app so all controls match */
+.btn, button, a.btn { display:inline-flex; align-items:center; justify-content:center; padding:12px 22px; border-radius:10px; border:1px solid rgba(59,63,43,0.12); background: linear-gradient(180deg, rgba(255,255,255,0.96), rgba(245,248,235,0.96)); color:var(--camo-dark); box-shadow: 0 2px 6px rgba(0,0,0,0.04); text-decoration:none }
+.btn:hover, button:hover, a.btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(0,0,0,0.08); color:var(--camo-dark) }
+
+/* Smaller / larger variants */
+.btn-sm, button.btn-sm { padding:6px 10px; border-radius:8px; font-size:0.9rem }
+.btn-lg, button.btn-lg { padding:14px 26px; border-radius:12px; font-size:1.05rem }
+
+/* ensure disabled buttons remain readable */
+.btn:disabled, button:disabled, a.btn.disabled { opacity:0.7; color:var(--camo-dark); cursor:not-allowed }
+
+/* Hero card overflow fix: ensure header doesn't overlap hero */
+.hero{ margin-top:18px }
+
+/* Keep link-style buttons subtle but with same base look */
+.btn-link, .btn.btn-link { background: transparent; border: 0; color: var(--camo-dark); box-shadow: none; padding:6px 8px }
+
+/* Danger/Primary variants: keep semantic colors but maintain the same shape */
+.btn-danger { background: linear-gradient(180deg,#fff6f6,#fff2f2); border-color: rgba(180,30,30,0.08); color:#8b1e1e }
+.btn-success { background: linear-gradient(180deg,#f6fff6,#f2fff2); border-color: rgba(30,120,30,0.06); color:#1f6e2e }
+.btn-sm.btn-warning, .btn-warning{ background: var(--accent); border-color: darken(var(--accent), 10%); }
+
+/* subtle focus for inputs */
+.form-control:focus{ outline: none; }
+
+/* button hover polish */
+.btn-outline-primary{ transition: transform .12s ease, box-shadow .12s ease }
+.btn-outline-primary:hover{ transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.08) }
+
+/* form and list subtle transitions */
+.card { transition: box-shadow .18s ease, transform .12s ease }
+.card:hover{ box-shadow: 0 6px 22px rgba(0,0,0,0.09); /* avoid translate on general cards to prevent layout shifts */ }
+
+.soldiers-grid{ display:grid; grid-template-columns: 1fr; gap:12px; /* single column list */ grid-auto-rows: auto; align-items: start }
+.old-soldiers-grid > * { box-sizing: border-box }
+.soldiers-grid > * { box-sizing: border-box }
+.soldier-card{ background: linear-gradient(180deg, #fff, #fbfdf6); border-radius:8px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); display:flex; flex-direction:column; justify-content:space-between; box-sizing: border-box; min-height:110px; }
+.soldier-card .card-body{ min-height:80px; flex:1 }
+.soldier-card .card-footer{ border-top:1px solid rgba(0,0,0,0.04); background:transparent }
+
+/* Hover a soldier card without shifting other grid items */
+.soldier-card{ position: relative }
+.soldier-card:hover{ z-index: 5; box-shadow: 0 10px 30px rgba(0,0,0,0.12) }
+
+/* Prevent column breaks in some browsers and ensure consistent layout */
+.soldiers-grid > * { break-inside: avoid; -webkit-column-break-inside: avoid; -moz-column-break-inside: avoid }
+
+/* make logout button animated like release buttons */
+.logout-btn{ transition: transform .12s ease, box-shadow .12s ease; background: linear-gradient(180deg,var(--accent),#005f9e); color:white; border-radius:6px }
+.logout-btn:hover{ transform: translateY(-3px); box-shadow: 0 6px 18px rgba(0,0,0,0.08) }
+
+/* release button edit control: vertical small edit button */
+.release-button-wrap{ display:flex; flex-direction:column; align-items:center; gap:8px }
+.release-edit-row{ margin-top:6px }
+.btn-edit{ background: transparent; border: 1px solid rgba(0,0,0,0.06); border-radius:6px; padding:6px 8px; cursor:pointer; font-size:12px }
+.btn-edit:hover{ background: rgba(0,0,0,0.03) }
+
+/* keep single-column layout at all widths */
+
+/* Year page two-column layout */
+.year-layout{ display:grid; grid-template-columns: 1fr; gap:12px; align-items:start }
+.year-left{ align-self:start }
+
+/* Login/Register centered card */
+.auth-wrapper{ display:flex; align-items:center; justify-content:center; min-height: calc(100vh - 120px) }
+.auth-card{ width: min(900px, 95%); display:flex; gap:20px; padding:20px; flex-wrap:wrap; align-items:stretch; justify-content:center }
+.auth-card .col-md-6{ background: linear-gradient(180deg,#fff,#fbfdf6); padding:18px; border-radius:10px; box-sizing:border-box; flex: 0 1 46%; min-width:220px }
+
+/* Prevent auth card from reacting to global .card:hover transform */
+.auth-card:hover{ transform: none !important }
+
+@media (max-width: 767px){
+  .row { flex-direction: column; }
+  .col-md-6 { width:100% }
+}
+
+/* Medium screens: stack auth columns to avoid overflow/protrusion */
+@media (max-width: 900px){
+  .auth-card { flex-direction: column; gap:12px }
+  .auth-card .col-md-6 { flex: 0 1 100%; width:100% }
+}
